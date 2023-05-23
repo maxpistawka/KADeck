@@ -1,3 +1,5 @@
+import random
+
 import aiohttp
 import discord
 
@@ -6,6 +8,7 @@ from discord.ext import commands
 import uuid
 import requests
 import shutil
+import time
 import json
 import tokenAbstractor
 import vocab
@@ -30,18 +33,13 @@ def run_discord_bot():
 
     client.run(str(tokenAbstractor.getKey()))
 
-@client.event
-async def on_message(message):
 
-    if message.author == client.user:
-        return
-    if message.content.startswith("hey"):
-        await message.channel.send('hey')
-    if message.content.startswith("max is"):
-        await message.channel.send('a bit of a beast')
-    else:
-        await client.process_commands(message)
-
+def printLanguages():
+    s = "You have a total of " + str(len(vocabList)) + " languages in the system! Here they are: \n"
+    keys = vocabList.keys()
+    for i in keys:
+        s += str(i) + ", "
+    return s
 
 def printVocabs(vocabs, language):
     s = "You have a total of " + str(len(vocabs)) + " " + language + " words added! Here they are: \n"
@@ -50,16 +48,26 @@ def printVocabs(vocabs, language):
     return s
 
 @client.command()
-async def addVocab(ctx, language, word, english, meaning):
-    newVoc = vocab.Vocab(word, english, meaning)
+async def addVocab(ctx, language, word, english):
+    newVoc = vocab.Vocab(word, english)
     vocabList[str(language)].append(newVoc)
     await ctx.send(printVocabs(vocabList[str(language)], str(language)))
 
 @client.command()
-async def languages(ctx, language, word, english, meaning):
-    newVoc = vocab.Vocab(word, english, meaning)
-    vocabList[str(language)].append(newVoc)
-    await ctx.send(printVocabs(vocabList[str(language)], str(language)))
+async def test(ctx, language):
+    lister = vocabList[language]
+    if len(lister) < 1:
+        await ctx.send("No vocab words for this language")
+    else:
+        randomInt = random.randint(0, len(lister)-1)
+        vocabWord = lister[randomInt]
+        await ctx.send("What is " + vocabWord.getWord() + " in English?")
+        time.sleep(10)
+        await ctx.send("Answer: " + vocabWord.getEnglish())
+
+@client.command()
+async def languages(ctx):
+    await ctx.send(printLanguages())
 
 @client.event
 async def on_message(message):
@@ -76,11 +84,14 @@ async def on_message(message):
         response = openai.Completion.create(
                 model="text-davinci-003",
                 prompt=user_message,
-                max_tokens=50,
+                max_tokens=100,
                 temperature=0.5
             )
 
         output = response["choices"][0]["text"]
 
         print(output)
+
         await message.channel.send(output)
+    else:
+        await client.process_commands(message)

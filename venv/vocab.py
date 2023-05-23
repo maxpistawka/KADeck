@@ -1,8 +1,7 @@
 class Vocab:
-    def __init__(self, word, english, meaning):
+    def __init__(self, word, english):
         self.word = word
         self.english = english
-        self.meaning = meaning
 
     def getWord(self) -> str:
         return str(self.word)
@@ -10,5 +9,4 @@ class Vocab:
     def getEnglish(self) -> str:
         return str(self.english)
 
-    def getMeaning(self):
-        return str(self.english)
+
