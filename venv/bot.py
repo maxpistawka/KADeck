@@ -34,6 +34,7 @@ def run_discord_bot():
     client.run(str(tokenAbstractor.getKey()))
 
 
+
 def printLanguages():
     s = "You have a total of " + str(len(vocabList)) + " languages in the system! Here they are: \n"
     keys = vocabList.keys()
@@ -65,6 +66,8 @@ async def test(ctx, language):
         time.sleep(10)
         await ctx.send("Answer: " + vocabWord.getEnglish())
 
+
+
 @client.command()
 async def languages(ctx):
     await ctx.send(printLanguages())
@@ -85,7 +88,7 @@ async def on_message(message):
                 model="text-davinci-003",
                 prompt=user_message,
                 max_tokens=100,
-                temperature=0.5
+                temperature=0
             )
 
         output = response["choices"][0]["text"]
