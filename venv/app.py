@@ -208,8 +208,6 @@ def urgencyCalc(score, deck_id, vocab_id):
     mysql.connection.commit()
 
 
-
-
 def getNextVocab(deck_id):
     ''' first look for days before today in logs, then look forvocab in the deck that arent in logs, then look for one in logs with the soonest time after, then just pick a random one.'''
     cur = mysql.connection.cursor()
