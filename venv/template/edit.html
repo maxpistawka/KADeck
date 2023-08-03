@@ -1,0 +1,33 @@
+<h1>Change Title</h1>
+
+<form method = "POST">
+    <input type = "text" name = "title"/>
+
+    <input type= "hidden" name="btn_identifier" value="title_identifier" />
+    <input type = "submit"/>
+</form>
+
+<a href="/unsubscribe/{{ deckid }}">
+    <h2> Unsubscribe Deck</h2>
+</a>
+
+<h1>Add Vocab</h1>
+
+<form method = "POST">
+    <input type = "text" name = "english"/>
+    <input type = "text" name = "korean"/>
+    <input type= "hidden" name="btn_identifier" value="add_identifier" />
+    <input type = "submit"/>
+</form>
+
+<h1>Delete Vocab</h1>
+
+{% for vocab in vocabs %}
+        <a href="/deletevocab/{{ vocab[0] }}">
+             <h2>{{ vocab[2] }}</h2>
+             <h2>{{ vocab[3] }}</h2>
+        </a>
+        <hr>
+{% endfor %}
+
+

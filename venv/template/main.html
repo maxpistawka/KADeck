@@ -1,0 +1,22 @@
+
+    <h1>Saved Decks</h1>
+    {% for post in posts %}
+        <a href="/deck/{{ post[1] }}">
+             <h2>{{ post[0] }}</h2>
+        </a>
+        <hr>
+    {% endfor %}
+
+    <h1>Subscribe to new Decks</h1>
+        {% for deck in decks %}
+            <a href="/subscribe_deck/{{deck[1] }}">
+             <h2>{{ deck[0] }}</h2>
+        </a>
+        <hr>
+    {% endfor %}
+
+    <h1>Create Deck</h1>
+    <form method = "POST">
+        <input type = "text" name = "title" required/>
+        <input type = "submit"/>
+    </form>
