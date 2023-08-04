@@ -1,22 +1,66 @@
 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" >
+</head>
+<body>
+    <header>
+        <img class = "logo" height = 60px, width = 70px src = "{{ url_for('static',filename='kdlogo.png') }}"> 
+        <nav>
+          <ul class = "nav__links">
+            <li><a href = "https://github.com/maxpistawka"> Projects </a></li>
+            <li><a href = "https://maxpistawka.com"> About Me </a></li>
+            <li><a href = "https://github.com/maxpistawka/Language-App"> Documentation </a></li>
+          </ul>
+        </nav>
+        <a class = "cta" href="https://maxpistawka.com"><button> Contact </button></a>
+      </header>
+</body>
+  
+
+<div style = "justify-content: space-evenly; margin-bottom: 100px; margin-top: 100px;">
+    <div style = "width:40%; display: inline-block; padding-right: 100px; padding-left: 100px;">
+        <div>
     <h1>Saved Decks</h1>
+</div>
+    <div class = "righter " style = " overflow: scroll;  max-height: 300px; overflow-x:hidden; overflow-y:auto;">
     {% for post in posts %}
         <a href="/deck/{{ post[1] }}">
              <h2>{{ post[0] }}</h2>
         </a>
-        <hr>
+       
     {% endfor %}
+</div>
+</div>
 
-    <h1>Subscribe to new Decks</h1>
+<div style = "width:40%; display: inline-block;  padding-left: 100px;">
+    <div>
+        <h1>Sub to new decks</h1>
+    </div>
+
+    <div class = "righter "  style = "overflow: scroll;  max-height: 300px; overflow-x:hidden; overflow-y:auto;">
+     
         {% for deck in decks %}
             <a href="/subscribe_deck/{{deck[1] }}">
              <h2>{{ deck[0] }}</h2>
         </a>
-        <hr>
+      
     {% endfor %}
-
-    <h1>Create Deck</h1>
+</div>
+</div>
+</div>
+<h1>Create Deck</h1>
     <form method = "POST">
-        <input type = "text" name = "title" required/>
+        <input type = "text" name = "title" placeholder = "Enter title..." required/>
         <input type = "submit"/>
     </form>
+
+    
+</html>

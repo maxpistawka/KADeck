@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&family=Permanent+Marker&family=Rubik&family=Source+Code+Pro&display=swap');
+
+h1 {
+
+  color:red;
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  font-size: 40px;
+}
+
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #FCF6F5
+}
+ 
+
+
+
+li, a, button {
+text-align: center;
+
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  color: red;  
+  text-decoration: none;
+ 
+}
+
+h2 {
+    
+    border: 5px solid #990011;
+
+    box-sizing: border-box;
+
+    margin-left: 40%;
+    margin-right: 40%;    
+    margin-top: 150px;      
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

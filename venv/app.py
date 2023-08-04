@@ -1,25 +1,45 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, flash, render_template, request, redirect, session
 from flask_mysqldb import MySQL
 from datetime import date
 from hgtk.exception import NotHangulException
 from supermemo2 import SMTwo
 import hgtk
+import os
+from flask import request
+
+
 
 today = date.today()
 app = Flask(__name__, template_folder='template')
-
+secret = os.urandom(24) 
 app.config['MYSQL_HOST'] = "localhost"
 app.config['MYSQL_USER'] = "Max"
 app.config['MYSQL_PASSWORD'] = "max123"
 app.config['MYSQL_DB'] = "korean_decks"
 
 mysql = MySQL(app)
+
 currID = -1
 
+app.config["SECRET_KEY"] = secret
 
+def verify():
+    global currID
+    if currID > 0:
+        return True
+    if int(session.get('userid', -1)) > 0:
+        currID = int(session.get('userid', -1))
+        return True
+    else: 
+        return False
+    
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
+    global currID
+    if int(session.get('userid', -1)) > 0:
+        currID = int(session.get('userid', -1))
+        return redirect("/loggedin", code=301)
+    
     if request.method == 'POST':
         if request.form['btn_identifier'] == 'signup_identifier':
             try:
@@ -33,10 +53,11 @@ def index():
                 cur.close()
                 return "success"
             except:
+                flash('Invalid Credentials')
                 """# nothing"""
         elif request.form['btn_identifier'] == 'login_identifier':
-            try:
-                global currID
+            
+                
                 email = request.form['email']
                 password = request.form['password']
 
@@ -45,17 +66,21 @@ def index():
                 cur.execute("SELECT * FROM users WHERE email = '" + email + "' AND pass = '" + password + "'")
 
                 result = cur.fetchone()
-                currID = result[0]
-                cur.close()
-                return redirect("/loggedin", code=301)
-
-            except:
-                """# nothing"""
-        return "error"
+                if result:
+                    currID = result[0]
+                    cur.close()
+                    session['userid'] = currID
+                    return redirect("/loggedin", code=301)
+            
+        flash('Invalid Credentials')
 
     return render_template('index.html')
 @app.route('/loggedin', methods = ['GET', 'POST'])
 def loggedin():
+    
+    if not verify():
+        return redirect("/", code=301)
+    
     cur = mysql.connection.cursor()
 
     if request.method == 'POST':
@@ -69,42 +94,61 @@ def loggedin():
         mysql.connection.commit()
         return "successfully did it"
 
-    cur.execute("SELECT * FROM decks")
+    cur.execute("SELECT * FROM decks_user WHERE user_id != " + str(currID))
     unfilteredDecks = cur.fetchall()
-    decks = []
+    ids = []
     for deck in unfilteredDecks:
+        ids.append(deck[0])
+    
+    decks = []
+    for id in ids:
+        cur.execute("SELECT * FROM decks WHERE deck_id = " + str(id))
+        deck = cur.fetchone()
         decks.append([str(deck[1]), deck[0]])
 
-    cur = mysql.connection.cursor()
+ 
     cur.execute("SELECT * FROM decks_user WHERE user_id = " + str(currID))
-    unfiltered_user_decks = cur.fetchall()
-
+    unfilteredDecks = cur.fetchall()
+    ids = []
+    for deck in unfilteredDecks:
+        ids.append(deck[0])
+    
     user_decks = []
-    for deck in unfiltered_user_decks:
-        user_decks.append(["deck_id:" + str(deck[0]), deck[0]])
+    for id in ids:
+        cur.execute("SELECT * FROM decks WHERE deck_id = " + str(id))
+        deck = cur.fetchone()
+        user_decks.append([str(deck[1]), deck[0]])
+
 
     return render_template('main.html', posts=user_decks, decks=decks)
 
 @app.route('/subscribe_deck/<string:deck_id>')
 def subscribe(deck_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO decks_user (deck_id, user_id) VALUES (%s, %s)", (deck_id, currID))
     mysql.connection.commit()
     cur.close()
     return "success"
 
+
+
 @app.route('/deck/<string:deck_id>')
 def deckView(deck_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
-
     cur.execute("SELECT * FROM decks WHERE deck_id = " + str(deck_id))
-
     deck_name = cur.fetchone()[1]
-
     return render_template("view.html", deckid=deck_id, deckname=deck_name)
+
+
 
 @app.route('/deck/<string:deck_id>/edit', methods = ['GET', 'POST'])
 def deckEdit(deck_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
 
     if request.method == 'POST':
@@ -145,6 +189,8 @@ def endsGenerator(kor):
     return ends
 @app.route('/unsubscribe/<string:deck_id>')
 def unsubscribe(deck_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM decks_user WHERE deck_id = " + str(deck_id) + " AND user_id = " + str(currID))
     mysql.connection.commit()
@@ -153,6 +199,8 @@ def unsubscribe(deck_id):
 
 @app.route('/deletevocab/<string:vocab_id>')
 def deleteVocab(vocab_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM vocabulary WHERE vocab_id = " + str(vocab_id))
     cur.execute("DELETE FROM logs WHERE vocab_id = " + str(vocab_id))
@@ -163,6 +211,8 @@ def deleteVocab(vocab_id):
 
 @app.route('/deck/<string:deck_id>/review/<string:vocab_id>', methods = ['GET', 'POST'])
 def deckReview(deck_id, vocab_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
 
     if request.method == 'POST':
@@ -179,6 +229,8 @@ def deckReview(deck_id, vocab_id):
 
 @app.route('/deck/<string:deck_id>/review-back/<string:vocab_id>', methods=['GET', 'POST'])
 def deckReviewBack(deck_id, vocab_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
 
     if request.method == 'POST':
@@ -194,6 +246,8 @@ def deckReviewBack(deck_id, vocab_id):
     return render_template("reviewback.html", vocab=currVocab)
 
 def urgencyCalc(score, deck_id, vocab_id):
+    if not verify():
+        return redirect("/", code=301)
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM logs WHERE vocab_id = " + str(vocab_id) + " AND user_id = " + str(currID))
     log = cur.fetchone()
@@ -209,6 +263,8 @@ def urgencyCalc(score, deck_id, vocab_id):
 
 
 def getNextVocab(deck_id):
+    if not verify():
+        return redirect("/", code=301)
     ''' first look for days before today in logs, then look forvocab in the deck that arent in logs, then look for one in logs with the soonest time after, then just pick a random one.'''
     cur = mysql.connection.cursor()
 

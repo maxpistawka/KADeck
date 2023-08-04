@@ -1,12 +1,37 @@
 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/reviewback.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" >
+</head>
+<body>
+    <header>
+        <img class = "logo" height = 60px, width = 70px src = "{{ url_for('static',filename='kdlogo.png') }}"> 
+        <nav>
+          <ul class = "nav__links">
+            <li><a href = "https://github.com/maxpistawka"> Projects </a></li>
+            <li><a href = "https://maxpistawka.com"> About Me </a></li>
+            <li><a href = "https://github.com/maxpistawka/Language-App"> Documentation </a></li>
+          </ul>
+        </nav>
+        <a class = "cta" href="https://maxpistawka.com"><button> Contact </button></a>
+      </header>
+</body>
 
-<h1>{{ vocab[2] }}</h1>
+<h1 style = "padding-top:250px">{{ vocab[2] }}</h1>
 <h1>{{ vocab[4] }}</h1>
-
+<div class = "center">
 <form method = "POST">
     <button  name="btn_identifier" value="flip"  >flip</button>
 </form>
-
+</div>
+<div class = "center" style = "padding-top:20px">
 <form method = "POST">
     <button  name="btn_identifier" value="1"  >1</button>
 </form>
@@ -30,4 +55,5 @@
 <form method = "POST">
     <button  name="btn_identifier" value="6"  >6</button>
 </form>
-
+</div>
+</html>

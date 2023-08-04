@@ -1,8 +1,21 @@
-<h1>{{ deck_name }}</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/view.css') }}" >
+  </head>
+  
+<div>
+<h1>{{ deckname }}</h1>
+<hr>
             <a href="/deck/{{ deckid }}/review/-1">
              <h2> Review Deck</h2>
                 </a>
     <a href="/deck/{{ deckid }}/edit">
              <h2> Edit Deck</h2>
         </a>
-        <hr>
+</div>

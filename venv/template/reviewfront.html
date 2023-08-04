@@ -1,5 +1,40 @@
-<h1>{{ vocab[3] }}</h1>
+<!DOCTYPE html>
 
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/reviewfront.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" >
+</head>
+<body>
+  <header>
+    <a href = "/">
+    <img class = "logo" height = 60px, width = 70px src = "{{ url_for('static',filename='kdlogo.png') }}" href = "https://maxpistawka.com"> 
+</a>
+    <nav>
+      <ul class = "nav__links">
+        <li><a href = "https://github.com/maxpistawka"> Projects </a></li>
+        <li><a href = "https://maxpistawka.com"> About Me </a></li>
+        <li><a href = "https://github.com/maxpistawka/Language-App"> Documentation </a></li>
+      </ul>
+    </nav>
+    <a class = "cta" href="https://maxpistawka.com"><button> Contact </button></a>
+  </header>
+</body>
+
+  
+<div style = "padding-top: 300px">
+    <div>
+<h1>{{ vocab[3] }}</h1>
+</div>
+<div class = "center">
 <form method = "POST">
     <button name="btn_identifier" value="flip"  >flip</button>
 </form>
+</div>
+</div>
+</html>
