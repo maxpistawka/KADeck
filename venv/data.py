@@ -38,18 +38,17 @@ for db in my_cursor:
     print(db)
 """
 mydb = mysql.connector.connect(
-        host="localhost",
-        user="Max",
-        password="max123",
-        database="korean_decks")
+    host="localhost",
+    user="Max",
+    password="max123",
+    database="korean_decks")
 my_cursor = mydb.cursor()
-
 
 '''
 my_cursor.execute("INSERT INTO decks (deck_id, title, date_created, admin_user_id) VALUES (%s, %s, %s, %s)",
                   (1, "elementary", today, 3))
 mydb.commit()
-''' 
+'''
 '''
 url = 'https://learning-korean.com/elementary/20210101-10466/'
 # Create object page

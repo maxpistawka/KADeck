@@ -1,63 +1,60 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     <style>
         .my-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 2000px;
-}
+            display: flex;
+            flex-direction: column;
+            max-width: 2000px;
+        }
 
-.my-form textarea {
-    min-width: 35%;
-    min-height: 200px;
-  border: .1rem solid #000;
-  resize: both; /* control in which direction textarea can be resized */
-}
+        .my-form textarea {
+            min-width: 35%;
+            min-height: 200px;
+            border: .1rem solid #000;
+            resize: both; /* control in which direction textarea can be resized */
+        }
     </style>
-  </head>
+</head>
 <body>
 {% include 'navbar.html' %}
 {% block content %}
 {% endblock %}
 
 
+<div class="centered">
+
+    <div style="padding-top: 90px">
+        <h1 style="padding-bottom: 10px">Review Form</h1>
+
+        <form class="my-form" method="POST">
+            <textarea id="msg" style="padding: 15px 15px;" name="msg" rows="5" cols="50">Enter Review</textarea>
+            <input type="hidden" name="btn_identifier" value="submit_identifier"/>
+            <input style="margin-top: 16px" type="submit"/>
+        </form>
 
 
-    <div class = "centered">
-
-    <div style = "padding-top: 90px">
-    <h1 style = "padding-bottom: 10px" >Review Form</h1>
-
-<form class="my-form" method = "POST">
-  <textarea id="msg" style = "padding: 15px 15px;"  name="msg" rows="5" cols="50">Enter Review</textarea>
- <input type= "hidden" name="btn_identifier" value="submit_identifier" />
-        <input style = "margin-top: 16px" type = "submit"/>
-</form>
+    </div>
+</div>
 
 
-        </div>
-  </div >
-
-
-  </div>
+</div>
 </body>
 
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-   <ul>
-   {% for message in messages %}
-     <li>{{ message }}</li>
-   {% endfor %}
-   </ul>
-  {% endif %}
-  {% endwith %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 </html>
 

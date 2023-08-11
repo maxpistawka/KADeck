@@ -9,93 +9,103 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
     <script>
-function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
 
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-  table = document.getElementById("myTable2");
-  tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+            table = document.getElementById("myTable2");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 {% include 'navbar.html' %}
 {% block content %}
 {% endblock %}
 </body>
-<body style = "padding-bottom: 100px">
+<body style="padding-bottom: 100px">
 <div class="flex-container">
-  <h1>Search Engine</h1>
+    <h1>Search Engine</h1>
 </div>
-<input  type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
-<div style = "padding-top: 50px; width: 100%; display:flex; flex-direction:row; justify-content: space-between;  ">
-<div style = "margin-left: 5%; width: 40%;">
-    <h1> Saved Decks</h1>
-    <div class ="wrapper">
-<table  style = "width: 100%;" class = "myTable" id="myTable">
-  <tr style = "width: 100%;" class="header">
-    <th style = "width: 100%;">Title</th>
-  </tr>
-    {% for post in posts %}
-            <tr style = "width: 100%;">
-    <td style = "width: 100%;"> <a style = "width: 100%;" href="/deck/{{ post[1] }}/review">{{post[0]}}</a></td>
-  </tr>
-            {% endfor %}
+<div style="padding-top: 50px; width: 100%; display:flex; flex-direction:row; justify-content: space-between;  ">
+    <div style="margin-left: 5%; width: 40%;">
+        <h1> Saved Decks</h1>
+        <div class="wrapper">
+            <table style="width: 100%;" class="myTable" id="myTable">
+                <tr style="width: 100%;" class="header">
+                    <th style="width: 100%;">Title</th>
+                </tr>
+                {% for user_deck in user_decks %}
+                <tr style="width: 100%;">
+                    <td style="width: 100%;"><a style="width: 100%;" href="/deck/{{ user_deck[1] }}/review">{{user_deck[0]}}</a>
+                    </td>
+                </tr>
+                {% endfor %}
 
-</table>
+            </table>
         </div>
+    </div>
+    <div style="width: 40%; margin-right: 5%;">
+        <h1> Public Decks</h1>
+        <div class="wrapper">
+            <table class="myTable" id="myTable2">
+                <tr class="header">
+                    <th>Title</th>
+                </tr>
+                {% for deck in decks %}
+                <tr>
+                    <td><a href="/subscribe_deck/{{deck[1] }}">{{deck[0]}}</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
 </div>
-<div style = "width: 40%; margin-right: 5%;">
-    <h1> Public Decks</h1>
-    <div class ="wrapper">
-<table  class = "myTable" id="myTable2">
-  <tr class="header">
-    <th >Title</th>
-  </tr>
-    {% for deck in decks %}
-            <tr>
-    <td> <a href="/subscribe_deck/{{deck[1] }}">{{deck[0]}}</a></td>
-  </tr>
-            {% endfor %}
 
-</table>
-        </div>
-        </div>
-</div>
-
-<h1 style = "padding-top: 100px">Create Deck</h1>
+<h1 style="padding-top: 100px">Create Deck</h1>
 <form method="POST">
     <input type="text" name="title" placeholder="Enter title..." required/>
     <input type="submit"/>
 </form>
 
 </body>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 </html>

@@ -22,10 +22,10 @@ body {
 }
 
 .hide {
-  display: none;
+    display: none;
     position: absolute;
     right: 0;
-    text-align:left;
+    text-align: left;
 }
 
 .main:hover + .hide {
@@ -35,12 +35,12 @@ body {
     padding: 6px 14px;
     border: 1px black solid;
     border-radius: 8px;
-     right: -7rem;
-    vertical-align:center;
+    right: -7rem;
+    vertical-align: center;
     align-self: end;
-    text-align:left;
+    text-align: left;
     position: absolute;
-     color: #000000;
+    color: #000000;
 }
 
 .center {
@@ -74,7 +74,7 @@ form {
 }
 
 .front {
-   background-color: #b8b5d7;
+    background-color: #b8b5d7;
 }
 
 
@@ -84,7 +84,7 @@ form {
     margin-left: 40%;
     margin-top: 10%;
     padding-bottom: 20px;
-    border: 4px solid    black;
+    border: 4px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,15 +92,14 @@ form {
 }
 
 
-
-.card2{
+.card2 {
 
     width: 425px;
     height: 450px;
     margin-left: 40%;
     margin-top: 10%;
     padding-bottom: 20px;
-    border: 4px solid    black;
+    border: 4px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;

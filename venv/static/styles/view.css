@@ -19,7 +19,6 @@ body {
 
 li, a, button {
     text-align: center;
-
     font-family: "Rubik", sans-serif;
     font-weight: 400;
     font-size: 25px;
@@ -29,11 +28,8 @@ li, a, button {
 }
 
 h2 {
-
     border: 5px solid #990011;
-
     box-sizing: border-box;
-
     margin-left: 40%;
     margin-right: 40%;
     margin-top: 150px;
