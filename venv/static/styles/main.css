@@ -221,5 +221,9 @@ width: 100%;
 }
 .myTable tr:hover {
 
-    background-color: #ce9ef8;
+    background-color: #ccaae3;
+}
+.myTable th:hover {
+
+    background-color:  #dab6b6;
 }

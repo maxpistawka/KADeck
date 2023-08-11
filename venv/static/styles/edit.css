@@ -22,14 +22,20 @@ h2 {
     margin-left: 300px;
     margin-right: 300px;
     overflow: scroll;
-    max-height: 600px;
+    max-height: 620px;
     overflow-x: hidden;
     overflow-y: auto;
     row-gap: 20px;
+    margin-bottom: 20px;
 }
 
 .grid-line {
     border: 1px solid black; /* try border-left and border-right */
     width: 80%;
+
+}
+
+.grid-line:hover {
+    background-color: #cf9cdc;
 
 }

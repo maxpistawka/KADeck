@@ -16,6 +16,33 @@ body {
     background-color: #FCF6F5
 }
 
+.main {
+    position: relative;
+    cursor: pointer;
+}
+
+.hide {
+  display: none;
+    position: absolute;
+    right: 0;
+    text-align:left;
+}
+
+.main:hover + .hide {
+    font-family: "Georgia", "serif";
+    background-color: #cf9cdc;
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px black solid;
+    border-radius: 8px;
+     right: -7rem;
+    vertical-align:center;
+    align-self: end;
+    text-align:left;
+    position: absolute;
+     color: #000000;
+}
+
 .center {
     display: flex;
     justify-content: center;
