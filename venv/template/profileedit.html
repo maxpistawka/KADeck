@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}" >
+
+  </head>
+<body>
+{% include 'navbar.html' %}
+{% block content %}
+{% endblock %}
+</body>
+  <a style = " text-align: center; text-decoration: underline; width:100%; height: 100%" href="/profile/{{ userid }}">
+<h1 style = "text-align: center; margin-top: 3%;">View Profile</h1>
+      </a>
+<div style ="display:flex; flex-direction: row; align-items: center; justify-content:space-around; margin-left:10%; margin-right:10%; margin-top: 5%;">
+  <div>
+
+    <h1 style = "text-align:center">{{username}}</h1>
+
+      {% if hasPic %}
+<img class="logo"  style = " border: 1px solid black; border-radius: 20px" height=300px, width=300px src="{{ url_for('static',filename=pic) }}"
+              >
+{% else %}
+      <img class="logo"  style = " border: 1px solid black; border-radius: 20px" height=300px, width=300px src="{{ url_for('static',filename='styles/profilepic.PNG') }}"
+              >
+      {% endif %}
+      <form method = "POST" enctype="multipart/form-data">
+        <input id = "inp" type="file" name="file"  required><br>
+        <input type="submit" value="Upload">
+    </form>
+    </div>
+
+<h1 style = "text-align:center">Vocab Counter <br><br> {{vocabCount}}</h1>
+<h1 style = "text-align:center">Deck Counter <br><br>  {{deckCount}}</h1>
+  </div>
+ {% with messages = get_flashed_messages() %}
+  {% if messages %}
+   <ul>
+   {% for message in messages %}
+     <li>{{ message }}</li>
+   {% endfor %}
+   </ul>
+  {% endif %}
+  {% endwith %}
+</html>

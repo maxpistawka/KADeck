@@ -1,64 +1,55 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/edit.css') }}" >
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/edit.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
 </head>
 <body>
-    <header>
-        <img class = "logo" height = 60px, width = 70px src = "{{ url_for('static',filename='kdlogo.png') }}" > 
-        <nav>
-          <ul class = "nav__links">
-            <li><a href = "https://github.com/maxpistawka"> Projects </a></li>
-            <li><a href = "https://maxpistawka.com"> About Me </a></li>
-            <li><a href = "https://github.com/maxpistawka/Language-App"> Documentation </a></li>
-          </ul>
-        </nav>
-        <a class = "cta" href="https://maxpistawka.com"><button> Contact </button></a>
-      </header>
+{% include 'navbar.html' %}
+{% block content %}
+{% endblock %}
 </body>
 
-<a href="/unsubscribe/{{ deckid }}" >
-    <h2 style = "padding-top: 50px"> Unsubscribe From Deck</h2>
+<a href="/unsubscribe/{{ deckid }}">
+    <h2 style="padding-top: 50px"> Unsubscribe From Deck</h2>
 </a>
 <hr>
-<h1 style = "padding-top: 50px">Change Title</h1>
+<h1 style="padding-top: 50px">Change Title</h1>
 
-<form method = "POST">
-    <input type = "text" name = "title" placeholder = "Enter title..."/>
-    <input type= "hidden" name="btn_identifier" value="title_identifier" />
-    <input type = "submit"/>
+<form method="POST">
+    <input type="text" name="title" placeholder="Enter title..."/>
+    <input type="hidden" name="btn_identifier" value="title_identifier"/>
+    <input type="submit"/>
 </form>
 
 
 <hr>
-<h1 style = "padding-top: 50px">Add Vocab</h1>
+<h1 style="padding-top: 50px">Add Vocab</h1>
 
-<form method = "POST">
-     <label for="fname"></label>
-    <input type = "text" name = "english" placeholder = "Add English..."/>
-    <input type = "text" name = "korean" placeholder = "Add Korean..."/>
-    <input type= "hidden" name="btn_identifier" value="add_identifier" />
-    <input type = "submit"/>
+<form method="POST">
+    <label for="fname"></label>
+    <input type="text" name="english" placeholder="Add English..."/>
+    <input type="text" name="korean" placeholder="Add Korean..."/>
+    <input type="hidden" name="btn_identifier" value="add_identifier"/>
+    <input type="submit"/>
 </form>
 <hr>
-<h1 style = "padding-top: 50px">Delete Vocab</h1>
-<div class = "grid-container">
-{% for vocab in vocabs %}
-<div>
+<h1 style="padding-top: 50px">Delete Vocab</h1>
+<div class="grid-container ">
+    {% for vocab in vocabs %}
+    <div class="grid-line">
         <a href="/deletevocab/{{ vocab[0] }}">
-             <h2>{{ vocab[3] }}</h2>
+            <h2>{{ vocab[3] }}</h2>
         </a>
-        
+
     </div>
-    
-{% endfor %}
+
+    {% endfor %}
 </div>
 
 

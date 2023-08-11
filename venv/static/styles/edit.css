@@ -1,22 +1,35 @@
 
 h1 {
     text-align: center;
-    
+
 }
+
 h2 {
 
-    
+
     height: 100%;
     box-sizing: border-box;
     padding: 1rem;
     text-align: center;
-    
+
 
 }
+
 .grid-container {
     display: grid;
     justify-items: center;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-left: 300px;
+    margin-right: 300px;
+    overflow: scroll;
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    row-gap: 20px;
+}
 
+.grid-line {
+    border: 1px solid black; /* try border-left and border-right */
+    width: 80%;
 
-  }
+}

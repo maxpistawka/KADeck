@@ -1,5 +1,13 @@
 from supermemo2 import SMTwo
 
+
+import hgtk
+
+decomposed = hgtk.letter.decompose("않")
+consonants = {""}
+
+print(decomposed)
+
 # first review
 # using quality=4 as an example, read below for what each value from 0 to 5 represents
 # review date would default to date.today() if not provided

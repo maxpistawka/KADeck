@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/navbar.css') }}">
+</head>
+
+<body>
+
+<header>
+    <a href="/">
+        <img class="logo" height=60px, width=70px src="{{ url_for('static',filename='styles/kdlogo.png') }}"
+             href="https://maxpistawka.com" target="_blank">
+    </a>
+    <nav>
+        <ul class="nav__links">
+            <li><a href="https://github.com/maxpistawka" target="_blank"> Projects </a></li>
+            <li><a href="/reviews" > Review </a></li>
+            <li><a href="https://github.com/maxpistawka/Language-App" target="_blank"> Documentation </a></li>
+        </ul>
+    </nav>
+    <a class="cta" href="https://maxpistawka.com" target="_blank">
+        <button> Contact</button>
+    </a>
+</header>
+</body>
+</html>

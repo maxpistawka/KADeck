@@ -1,40 +1,256 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/reviewfront.css') }}" >
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" >
-</head>
-<body>
-  <header>
-    <a href = "/">
-    <img class = "logo" height = 60px, width = 70px src = "{{ url_for('static',filename='kdlogo.png') }}" href = "https://maxpistawka.com"> 
-</a>
-    <nav>
-      <ul class = "nav__links">
-        <li><a href = "https://github.com/maxpistawka"> Projects </a></li>
-        <li><a href = "https://maxpistawka.com"> About Me </a></li>
-        <li><a href = "https://github.com/maxpistawka/Language-App"> Documentation </a></li>
-      </ul>
-    </nav>
-    <a class = "cta" href="https://maxpistawka.com"><button> Contact </button></a>
-  </header>
-</body>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/reviewfront.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  
-<div style = "padding-top: 300px">
+    <script>
+        function toggle_display(){
+
+            var front, back;
+  front = document.querySelector('.front');
+    back = document.querySelector('.back');
+  if(front.style.display == 'none'){
+      front.style.display = ''
+       back.style.display = 'none'
+  }else{
+     front.style.display = 'none'
+      back.style.display = ''
+  }
+
+}
+
+
+</script>
+
+     <script>
+         window.onload = function() {
+            document.getElementById('endings').innerHTML = endingFN('{{ vocab[4] }}'); // Call the function automatically when the page loads
+        }
+
+        function endingFN(endings) {
+            const endingsMap = new Map();
+            endings = endings.toString()
+            console.log(endings)
+            endingsMap.set("ㅎㄱ", "ㅋ");
+            endingsMap.set("ㅎㄴ", "ㄴㄴ");
+            endingsMap.set("ㅎㄷ", "ㅌ");
+            endingsMap.set("ㅎㅅ", "ㅅㅅ");
+            endingsMap.set("ㅎㅇ", "");
+            endingsMap.set("ㅎㅈ", "ㅊ");
+            endingsMap.set("ㄱㄴ", "ㅇㄴ");
+            endingsMap.set("ㄱㄹ", "ㅇㄴ");
+            endingsMap.set("ㄱㅁ", "ㅇㅁ");
+            endingsMap.set("ㄱㅎ", "ㅋ");
+            endingsMap.set("ㄱㅇ", "ㄱ");
+            endingsMap.set("ㄴㄱ", "ㅇㄱ");
+            endingsMap.set("ㄴㄹ", "ㄹㄹ");
+            endingsMap.set("ㄴㅁ", "ㅁㅁ");
+            endingsMap.set("ㄴㅂ", "ㅁㅂ");
+            endingsMap.set("ㄴㅇ", "ㄴ");
+            endingsMap.set("ㄴㅎ", "ㄴ");
+            endingsMap.set("ㄷㄱ", "ㄲ");
+            endingsMap.set("ㄷㄴ", "ㄴㄴ");
+            endingsMap.set("ㄷㅁ", "ㄴㅁ");
+            endingsMap.set("ㄷㅇ", "ㄷ");
+            endingsMap.set("ㄷㅎ", "ㅊ or ㅌ");
+            endingsMap.set("ㄹㄴ", "ㄹㄹ");
+            endingsMap.set("ㄹㅎ",  "ㄹ");
+            endingsMap.set("ㅁㄹ", "ㅁㄹ");
+            endingsMap.set("ㅁㅎ", "ㅁ");
+            endingsMap.set("ㅂㄴ", "ㅁㄴ");
+            endingsMap.set("ㅂㄹ", "ㅁㄴ");
+            endingsMap.set("ㅂㅁ", "ㅁㅁ");
+            endingsMap.set("ㅂㅎ", "ㅍ");
+            endingsMap.set("ㅅㄱ", "ㄲ");
+            endingsMap.set("ㅅㄴ", "ㄴㄴ");
+            endingsMap.set("ㅅㅎ", "ㅌ");
+            endingsMap.set("ㅇㄹ", "ㅇㄴ");
+            endingsMap.set("ㅈㄱ", "ㄲ");
+            endingsMap.set("ㅈㅎ", "ㅊ");
+            endingsMap.set("ㅊㄱ", "ㄲ");
+            endingsMap.set("ㅊㅁ", "ㄴㅁ");
+            endingsMap.set("ㅊㅂ", "ㅃ");
+            endingsMap.set("ㅋㄴ", "ㅇㄴ");
+            endingsMap.set("ㅋㅁ", "ㅇㅁ");
+            endingsMap.set("ㅌㄱ", "ㄲ");
+            endingsMap.set("ㅌㄴ", "ㅇㄴ");
+            endingsMap.set("ㅌㅁ", "ㄴㅁ");
+            endingsMap.set("ㅌㅇ", "ㅌ or ㅊ");
+            var subStr;
+            var result = [];
+            for (let i = 0; i < endings.length - 1; i+=2) {
+                 subStr = endings.substring(i, i+2);
+                 console.log(subStr)
+                 if (endingsMap.has(subStr)) {
+                     console.log("has")
+                    result.push(subStr + " -> " + endingsMap.get(subStr))
+                     console.log(endingsMap.get(subStr))
+                 }
+        }
+            console.log(result)
+
+            console.log(result.join('result'))
+            return(result.join('result'))
+
+        }
+
+        async function nextVocab(rating) {
+            vocab_id = document.getElementById('vocabid').innerHTML;
+            firstUrl = "/log/{{ deckid }}/" + vocab_id + "/" + rating;
+
+            await axios.get(firstUrl)
+            .then(await function(response) {
+            })
+            .catch(await function(error) {
+                console.log(error);
+            });
+
+
+
+
+            url = "/api/datapoint/{{ deckid }}";
+
+            await axios.get(url)
+            .then(await function(response) {
+
+                // The data will all be returned as a JSON object
+                // We can access the data by using the data property of the response object
+
+                document.getElementById('korean').innerHTML = response.data.korean;
+                document.getElementById('english').innerHTML = response.data.english;
+                document.getElementById('endings').innerHTML =  endingFN(response.data.endings);
+                document.getElementById('vocabid').innerHTML = response.data.vocabid;
+                console.log(response.data.english)
+                console.log(response.data.vocabid)
+
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+            toggle_display()
+            console.log("wow3")
+
+        }
+
+
+    </script>
+    <h1 style = "display: none;" id = "vocabid">{{ vocab[0] }}</h1>
+</head>
+
+    <div style = " position: absolute;  left: 0px; right: 90%; min-width: 100px; top: 94px; bottom: 0px; background-color: rgba(210,99,174,0.2);">
+    <div style = " z-index: 10; display:flex; flex-direction: column; justify-content: space-between; align-items:center; position: absolute; margin-top: 80px; width: 100%; height:80%; ">
+        <div style = " z-index: 10; width: 100%; display:flex; flex-direction: column; justify-content: center; align-items:center; ">
+        <a style = " text-align: center; width:100%; height: 100%" href="/profile/{{ userid }}/edit">
+
+              {% if hasPic %}
+<img class="logo"  style = "border: 1px solid black; border-radius: 20px; object-fit: cover;" height=90% width = 85%; src="{{ url_for('static',filename=pic) }}"
+              >
+{% else %}
+      <img class="logo"  style = " border: 1px solid black; border-radius: 20px" height=90%, width = 85%; src="{{ url_for('static',filename='styles/profilepic.PNG') }}"
+              >
+      {% endif %}
+            </a>
+
+             <div style = "width: 100%; display:flex; flex-direction: row; justify-content: center; align-items:center; ">
+            <svg style = "height: 30px; padding-right:8px; display:inline-block" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+     <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"></path>
+
+        </svg>
+
+
+        <p style = "display:inline-block; padding-right: 8px;">{{username}}</p>
+                </div>
+        </div>
+
+    <div style = "width: 100%; display:flex; flex-direction: row; justify-content: center; align-items:center; ">
+        <svg style = "height: 50px; padding-right:3px; display:inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><path d="m11.2779 4.5h20.3699v33.9257h-20.3699z"/><path d="m31.648 7.037h2.537v33.926h-20.37v-2.537"/><path d="m34.185 9.574h2.537v33.926h-20.37v-2.537"/></g><circle cx="21.4628" cy="32.4054" r=".75"/><path d="m21.4628 24.4054v5.95" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21.4628" cy="17.2135" r=".75"/><path d="m19.2628 11.4135a2.2 2.2 0 1 1 4.4 0 1.97 1.97 0 0 1 -.6443 1.5557c-.4553.3652-1.5636.9635-1.5636 1.8943" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>{{deckname}}</p>
+    </div>
+    <div style = "width: 100%; display:flex; flex-direction: row; justify-content: center; align-items:center; ">
+<svg style = "opacity: 0.4; height: 26px; padding-right:3px;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path clip-rule="evenodd" fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"></path>
+</svg>
+        <p>{{vocabCount}}</p>
+    </div>
+        <div style = "width:80%; text-align:center;">
+            <a href="/deck/{{ deckid }}/edit">
+
+        <svg style = "opacity: 0.7; height:50%" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M10 3.75a2 2 0 10-4 0 2 2 0 004 0zM17.25 4.5a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM5 3.75a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 01.75.75zM4.25 17a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM17.25 17a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM9 10a.75.75 0 01-.75.75h-5.5a.75.75 0 010-1.5h5.5A.75.75 0 019 10zM17.25 10.75a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM14 10a2 2 0 10-4 0 2 2 0 004 0zM10 16.25a2 2 0 10-4 0 2 2 0 004 0z"></path>
+</svg>
+
+    </a>
+            </div>
+
+
+</div>
+</div>
+
+
+{% include 'navbar.html' %}
+{% block content %}
+{% endblock %}
+
+
+
+
+
+<div style = "display:block">
+<div onclick="toggle_display()" class="front card" >
     <div>
-<h1>{{ vocab[3] }}</h1>
-</div>
-<div class = "center">
-<form method = "POST">
-    <button name="btn_identifier" value="flip"  >flip</button>
-</form>
+        <h1 id = "english">{{ vocab[3] }}</h1>
+    </div>
 </div>
 </div>
+<div   class = "back card2 " style ="display:none;">
+<div onclick = "toggle_display()">
+<h1  id = "korean" style="padding-top:10%">{{ vocab[2] }}</h1>
+    </div>
+    <div>
+<h1 id = "endings">{{ vocab[4] }}</h1>
+         </div>
+<div style = "z-index:100; width: 100%; justify-content:space-between; justify-items: center; display:grid; row-gap: 20px; grid-template-columns: 1fr 1fr 1fr;">
+    <div>
+    <form onsubmit="return false">
+        <button  onclick = "nextVocab('1')" >1</button>
+    </form>
+</div>
+    <div>
+    <form onsubmit="return false">
+        <button  onclick = "nextVocab('2')" >2</button>
+    </form>
+</div>
+    <div>
+    <form onsubmit="return false">
+        <button  onclick = "nextVocab('3')" >3</button>
+    </form>
+</div>
+    <div>
+    <form onsubmit="return false">
+        <button  onclick = "nextVocab('4')" >4</button>
+    </form>
+</div>
+    <div>
+    <form onsubmit="return false">
+        <button  onclick = "nextVocab('5')" >5</button>
+    </form>
+</div>
+    <div>
+    <form onsubmit="return false">
+        <button  onclick = "nextVocab('6')" >6</button>
+    </form>
+        </div>
+
+</div>
+</div>
+</div>
+
 </html>

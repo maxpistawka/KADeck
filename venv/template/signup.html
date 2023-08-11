@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}" >
+
+  </head>
+<body>
+{% include 'navbar.html' %}
+{% block content %}
+{% endblock %}
+
+
+
+
+    <div class = "centered">
+
+    <div style = "padding-top: 90px">
+    <h1 style = "padding-bottom: 15px; text-decoration: underline;" >Sign Up</h1>
+
+
+    <form method = "POST">
+      <label> Username </label>
+        <input type = "text" name = "username" placeholder="Your username.."/>
+
+        <label >Email</label>
+        <input type = "email" name = "email" placeholder="Your email.." required/>
+
+        <label >Password</label>
+        <input type = "password" name = "password" placeholder="Your password.."/>
+
+         <input type= "hidden" name="btn_identifier" value="signup_identifier" />
+        <input type = "submit"/>
+    </form>
+        <div style = "padding-top: 50px">
+            <h3>or <a href="/login" style = "font-size: 20px; margin-left: 5px; font-weight: bold; text-decoration: underline dotted;">Sign In</a></h3>
+        </div>
+        </div>
+  </div >
+
+
+  </div>
+</body>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+   <ul>
+   {% for message in messages %}
+     <li>{{ message }}</li>
+   {% endfor %}
+   </ul>
+  {% endif %}
+  {% endwith %}
+</html>
+

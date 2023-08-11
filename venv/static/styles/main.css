@@ -1,145 +1,225 @@
 
 h1 {
     text-align: center;
-    
+
 }
+
 h2 {
     margin-right: 10px;
-            border: 2px solid red;
-            height: 100%;
-            box-sizing: border-box;
-            padding: 1rem;
-            text-align: center;
-            color: green;
-   
+    border: 2px solid red;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    text-align: center;
+    color: green;
+
 }
+
 form {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    }
+}
 
-    ::-webkit-scrollbar {
-        width: 15px;
-      }
-      
-      /* Track */
-      ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px grey; 
-        border-radius: 10px;
-      }
-       
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: red; 
-        border-radius: 10px;
-      }
-      
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-        background: #b30000; 
-      }
-      h1 {
+::-webkit-scrollbar {
+    width: 15px;
+}
 
-        color:#990011
-      }
-      
-      .centered {
-        padding-top: 5rem;
-        text-align: center;
-      }
-      
-      body {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        background-color: #FCF6F5
-      }
-       
-      
-      label {
-        font-family: "Rubik", sans-serif;
-        font-weight: 400;
-        font-size: 8;
-        color: #990011;  
-        text-decoration: none;
-      }
-      
-      header {
-        background-color: #ceabaf;
-      }
-      
-      li, a, button {
-        font-family: "Rubik", sans-serif;
-        font-weight: 400;
-        font-size: 16px;
-        color: #990011;  
-        text-decoration: none;
-      }
-      
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 10%;
-      }
-      
-      .logo {
-        cursor: pointer;
-      }
-      
-      .nav__links li {
-        display: inline-block;
-        padding: 0px 20px;
-      }
-      
-      .nav__links li a {
-        transition: all 0.3s ease 0s;
-      }
-      
-      
-      .nav__links li a:hover {
-        color: brown
-      }
-      
-      button {
-        
-        padding: 9px 25px;
-        background-color: rgba(212, 83, 24, 1);
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        color: whitesmoke;
-        transition: all 0.3s ease 0s;
-      }
-      
-      button:hover {
-        background-color: rgba(212, 83, 24, 0.8);
-      }
-      
-      
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
 
-      
-      input[type=text] {
-        width: 25%;
-        padding: 6px 8px;
-        margin: 0px 0;
-        box-sizing: border-box;
-      }
-     
-      
- 
-      
-      
-      input[type=submit] {
-        
-        background-color: #990011;
-        border: none;
-        color: white;
-        border-radius: 25px;
-        padding: 10px 20px;
-        text-decoration: none;
-        margin: 16px 2px;
-        cursor: pointer;
-      }
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #8c5059;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #d3969d;
+}
+
+h1 {
+
+    color: #990011
+}
+
+.centered {
+    padding-top: 5rem;
+    text-align: center;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #FCF6F5
+}
+
+
+label {
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    font-size: 8;
+    color: #990011;
+    text-decoration: none;
+}
+
+header {
+    background-color: #ceabaf;
+}
+
+li, a, button {
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #990011;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.nav__links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav__links li a {
+    transition: all 0.3s ease 0s;
+}
+
+
+.nav__links li a:hover {
+    color: brown
+}
+
+button {
+
+    padding: 9px 25px;
+    background-color: rgba(212, 83, 24, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    color: whitesmoke;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover {
+    background-color: rgba(212, 83, 24, 0.8);
+}
+
+
+input[type=text] {
+    width: 25%;
+    padding: 6px 8px;
+    margin: 0px 0;
+    box-sizing: border-box;
+}
+
+
+input[type=submit] {
+
+    background-color: #990011;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 16px 2px;
+    cursor: pointer;
+}
+
+
+
+
+
+.flex-container {
+  display: flex;
+margin-top: 75px;
+  /*this centers the text horizontally*/
+  justify-content: center;
+
+  /*this centers the text vertically*/
+  align-items: center;
+
+  height: 50px;
+  color: #c00000;
+  font-size: 1.2rem;
+}
+
+
+#myInput {
+    margin-top: 10px;
+     border: 2px solid #000;
+
+    border-radius: 30px;
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+    margin-left: 20%;
+  width: 60%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+
+
+.myTable {
+
+  border-collapse: collapse; /* Collapse borders */
+    width:100%;
+
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+
+
+}
+
+
+.wrapper {
+    overflow:hidden;
+    overflow-y: scroll;
+    height: 500px;
+    padding-right: 2px;
+}
+
+
+
+.myTable th, .myTable td {
+    width:100%;
+  text-align: left; /* Left-align text */
+  padding: 12px; /* Add padding */
+    height: 30px;
+    border: 2px solid #000000; /* Add a grey border */
+}
+
+.myTable tr {
+width: 100%;
+  /* Add a bottom border to all table rows */
+  border-bottom: 2px solid black;
+
+}
+
+.myTable tr.header {
+    width: 100%;
+  /* Add a grey background color to the table header and on hover */
+  background-color: #dab6b6;
+
+}
+.myTable tr:hover {
+
+    background-color: #ce9ef8;
+}

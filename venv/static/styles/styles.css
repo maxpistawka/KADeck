@@ -1,123 +1,126 @@
 
-
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&family=Permanent+Marker&family=Rubik&family=Source+Code+Pro&display=swap');
-
 h1 {
 
-  color:#990011
+    color: #990011
 }
 
 .centered {
-  padding-top: 5rem;
-  text-align: center;
+    padding-top: 5rem;
+    text-align: center;
 }
 
 body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  background-color: #FCF6F5
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #f2eef2;
 }
- 
+
+#inp {
+    padding-top:10px;
+  text-align-last: center;
+  margin: auto;
+}
 
 label {
-  font-family: "Rubik", sans-serif;
-  font-weight: 400;
-  font-size: 8;
-  color: #990011;  
-  text-decoration: none;
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    color: #990011;
+    text-decoration: none;
 }
+h3 {
+    font-size: 20px;
+    font-colour: black;
 
+}
 header {
-  background-color: #ceabaf;
+    background-color: #ceabaf;
 }
 
 li, a, button {
-  font-family: "Rubik", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #990011;  
-  text-decoration: none;
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #512940;
+    text-decoration: none;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
 }
 
 .logo {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .nav__links li {
-  display: inline-block;
-  padding: 0px 20px;
+    display: inline-block;
+    padding: 0px 20px;
 }
 
 .nav__links li a {
-  transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
 }
 
 
 .nav__links li a:hover {
-  color: brown
+    color: brown
 }
 
 button {
-  padding: 9px 25px;
-  background-color: rgba(212, 83, 24, 1);
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  color: whitesmoke;
-  transition: all 0.3s ease 0s;
+    padding: 9px 25px;
+    background-color: rgba(212, 83, 24, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    color: whitesmoke;
+    transition: all 0.3s ease 0s;
 }
 
 button:hover {
-  background-color: rgba(212, 83, 24, 0.8);
+    background-color: rgba(212, 83, 24, 0.8);
 }
-
 
 
 form {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  }
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 input[type=text] {
-  width: 25%;
-  padding: 6px 8px;
-  margin: 8px 0;
-  box-sizing: border-box;
+    width: 25%;
+    padding: 6px 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
+
 input[type=email] {
-  width: 25%;
-  padding: 6px 8px;
-  margin: 8px 0;
-  box-sizing: border-box;
+    width: 25%;
+    padding: 6px 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
 
 input[type=password] {
-  width: 25%;
-  padding: 6px 8px;
-  margin: 8px 0;
-  box-sizing: border-box;
+    width: 25%;
+    padding: 6px 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
 
 
-
 input[type=submit] {
-  background-color: #990011;
-  border: none;
-  color: white;
-  border-radius: 25px;
-  padding: 10px 20px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
+    background-color: #990011;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 1px 2px;
+    cursor: pointer;
 }

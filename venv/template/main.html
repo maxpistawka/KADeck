@@ -1,66 +1,101 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" >
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+  table = document.getElementById("myTable2");
+  tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 </head>
 <body>
-    <header>
-        <img class = "logo" height = 60px, width = 70px src = "{{ url_for('static',filename='kdlogo.png') }}"> 
-        <nav>
-          <ul class = "nav__links">
-            <li><a href = "https://github.com/maxpistawka"> Projects </a></li>
-            <li><a href = "https://maxpistawka.com"> About Me </a></li>
-            <li><a href = "https://github.com/maxpistawka/Language-App"> Documentation </a></li>
-          </ul>
-        </nav>
-        <a class = "cta" href="https://maxpistawka.com"><button> Contact </button></a>
-      </header>
+{% include 'navbar.html' %}
+{% block content %}
+{% endblock %}
 </body>
-  
-
-<div style = "justify-content: space-evenly; margin-bottom: 100px; margin-top: 100px;">
-    <div style = "width:40%; display: inline-block; padding-right: 100px; padding-left: 100px;">
-        <div>
-    <h1>Saved Decks</h1>
+<body style = "padding-bottom: 100px">
+<div class="flex-container">
+  <h1>Search Engine</h1>
 </div>
-    <div class = "righter " style = " overflow: scroll;  max-height: 300px; overflow-x:hidden; overflow-y:auto;">
+<input  type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+<div style = "padding-top: 50px; width: 100%; display:flex; flex-direction:row; justify-content: space-between;  ">
+<div style = "margin-left: 5%; width: 40%;">
+    <h1> Saved Decks</h1>
+    <div class ="wrapper">
+<table  style = "width: 100%;" class = "myTable" id="myTable">
+  <tr style = "width: 100%;" class="header">
+    <th style = "width: 100%;">Title</th>
+  </tr>
     {% for post in posts %}
-        <a href="/deck/{{ post[1] }}">
-             <h2>{{ post[0] }}</h2>
-        </a>
-       
-    {% endfor %}
+            <tr style = "width: 100%;">
+    <td style = "width: 100%;"> <a style = "width: 100%;" href="/deck/{{ post[1] }}/review">{{post[0]}}</a></td>
+  </tr>
+            {% endfor %}
+
+</table>
+        </div>
 </div>
+<div style = "width: 40%; margin-right: 5%;">
+    <h1> Public Decks</h1>
+    <div class ="wrapper">
+<table  class = "myTable" id="myTable2">
+  <tr class="header">
+    <th >Title</th>
+  </tr>
+    {% for deck in decks %}
+            <tr>
+    <td> <a href="/subscribe_deck/{{deck[1] }}">{{deck[0]}}</a></td>
+  </tr>
+            {% endfor %}
+
+</table>
+        </div>
+        </div>
 </div>
 
-<div style = "width:40%; display: inline-block;  padding-left: 100px;">
-    <div>
-        <h1>Sub to new decks</h1>
-    </div>
+<h1 style = "padding-top: 100px">Create Deck</h1>
+<form method="POST">
+    <input type="text" name="title" placeholder="Enter title..." required/>
+    <input type="submit"/>
+</form>
 
-    <div class = "righter "  style = "overflow: scroll;  max-height: 300px; overflow-x:hidden; overflow-y:auto;">
-     
-        {% for deck in decks %}
-            <a href="/subscribe_deck/{{deck[1] }}">
-             <h2>{{ deck[0] }}</h2>
-        </a>
-      
-    {% endfor %}
-</div>
-</div>
-</div>
-<h1>Create Deck</h1>
-    <form method = "POST">
-        <input type = "text" name = "title" placeholder = "Enter title..." required/>
-        <input type = "submit"/>
-    </form>
-
-    
+</body>
 </html>
