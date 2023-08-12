@@ -9,18 +9,18 @@ from textblob import TextBlob
 from werkzeug.utils import secure_filename
 
 today = date.today()
-app = Flask(__name__, template_folder='template')
+application = Flask(__name__, template_folder='template')
 secret = os.urandom(24)
-app.config['MYSQL_HOST'] = "localhost"
-app.config['MYSQL_USER'] = "Max"
-app.config['MYSQL_PASSWORD'] = "max123"
-app.config['MYSQL_DB'] = "korean_decks"
-mysql = MySQL(app)
+application.config['MYSQL_HOST'] = "localhost"
+application.config['MYSQL_USER'] = "Max"
+application.config['MYSQL_PASSWORD'] = "max123"
+application.config['MYSQL_DB'] = "korean_decks"
+mysql = MySQL(application)
 currID = -1
-app.config["SECRET_KEY"] = secret
+application.config["SECRET_KEY"] = secret
 UPLOAD_FOLDER = 'static/imgs/'
 ALLOWED_EXTENSIONS = {'png', 'jpg'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def verify():
@@ -32,7 +32,7 @@ def verify():
         return True
 
 
-@app.route('/', methods=['GET', 'POST'])
+@application.route('/', methods=['GET', 'POST'])
 def index():
     global currID
     try:
@@ -51,19 +51,18 @@ def index():
                         mysql.connection.commit()
                         cur.close()
                         flash('Account Created')
-                        return render_template('login.html')
+                        redirect('/login', 301)
                     except mysql.connector.Error as err:
                         flash("Something went wrong: {}".format(err))
                 except:
                     flash('Invalid Credentials')
-                    """# nothing"""
     except:
         flash('Invalid Credentials')
         return render_template('signup.html')
     return render_template('signup.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@application.route('/login', methods=['GET', 'POST'])
 def login():
     global currID
     try:
@@ -90,7 +89,7 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/main', methods=['GET', 'POST'])
+@application.route('/main', methods=['GET', 'POST'])
 def main():
     if verify():
         return redirect("/", 301)
@@ -137,7 +136,7 @@ def deck_finder():
     return decks
 
 
-@app.route('/subscribe_deck/<string:deck_id>')
+@application.route('/subscribe_deck/<string:deck_id>')
 def subscribe(deck_id):
     if verify():
         return redirect("/", 301)
@@ -151,7 +150,7 @@ def subscribe(deck_id):
     return redirect("/main", 301)
 
 
-@app.route('/deck/<string:deck_id>/edit', methods=['GET', 'POST'])
+@application.route('/deck/<string:deck_id>/edit', methods=['GET', 'POST'])
 def deck_edit(deck_id):
     if verify():
         return redirect("/", 301)
@@ -196,7 +195,7 @@ def ends_generator(kor):
     return ends
 
 
-@app.route('/unsubscribe/<string:deck_id>')
+@application.route('/unsubscribe/<string:deck_id>')
 def unsubscribe(deck_id):
     if verify():
         return redirect("/", 301)
@@ -207,7 +206,7 @@ def unsubscribe(deck_id):
     return redirect("/main", 301)
 
 
-@app.route('/deletevocab/<string:vocab_id>/<string:deck_id>')
+@application.route('/deletevocab/<string:vocab_id>/<string:deck_id>')
 def delete_vocab(vocab_id, deck_id):
     if verify():
         return redirect("/", 301)
@@ -222,7 +221,7 @@ def delete_vocab(vocab_id, deck_id):
     return redirect('/deck/' + deck_id + "/edit")
 
 
-@app.route('/deck/<string:deck_id>/review')
+@application.route('/deck/<string:deck_id>/review')
 def deck_review(deck_id):
     if verify():
         return redirect("/", 301)
@@ -262,7 +261,7 @@ def is_not_admin(deck_id):
     return str(res[0]) != str(currID)
 
 
-@app.route('/profile/<string:user_id>', methods=['GET', 'POST'])
+@application.route('/profile/<string:user_id>', methods=['GET', 'POST'])
 def profile_view(user_id):
     if verify():
         return redirect("/", 301)
@@ -293,7 +292,7 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/profile/<string:user_id>/edit', methods=['GET', 'POST'])
+@application.route('/profile/<string:user_id>/edit', methods=['GET', 'POST'])
 def profile_edit(user_id):
     if verify():
         return redirect("/", 301)
@@ -315,7 +314,7 @@ def profile_edit(user_id):
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            directoryPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            directoryPath = os.path.join(application.config['UPLOAD_FOLDER'], filename)
             file.save(directoryPath)
             insert_query = "UPDATE users SET profile_pic = %s WHERE user_id = %s"
             values = (filename, user_id)
@@ -347,7 +346,7 @@ def profile_edit(user_id):
                            deckCount=deckCount, hasPic=hasPic, pic="imgs/" + filename)
 
 
-@app.route('/reviews', methods=['GET', 'POST'])
+@application.route('/reviews', methods=['GET', 'POST'])
 def give_review():
     if verify():
         return redirect("/", 301)
@@ -424,7 +423,7 @@ def get_next_vocab(deck_id):
     return cur.fetchone()
 
 
-@app.route('/api/datapoint/<string:deck_id>')
+@application.route('/api/datapoint/<string:deck_id>')
 def api_datapoint(deck_id):
     if verify():
         return redirect("/", 301)
@@ -438,7 +437,7 @@ def api_datapoint(deck_id):
     return jsonify(dictionary_to_return)
 
 
-@app.route('/log/<string:deck_id>/<string:vocab_id>/<string:rating>')
+@application.route('/log/<string:deck_id>/<string:vocab_id>/<string:rating>')
 def log(deck_id, vocab_id, rating):
     if verify():
         return redirect("/", 301)
@@ -449,6 +448,6 @@ def log(deck_id, vocab_id, rating):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
 
-app = Flask(__name__)
+
