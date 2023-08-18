@@ -69,7 +69,7 @@ It then shows what the characters assimilate to.
 
 Here is an example of this with the word for Korean in Korean, "한국어": 
 
-![img.png](img.png)
+![koreanExample.png](koreanExample.png)
 
 
 # Technical Portion
