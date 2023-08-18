@@ -57,8 +57,6 @@ print(page)
 
 soup = BeautifulSoup(page.text, 'html.parser')
 table1 = soup.find_all("table")
-
-
 arr = []
 for table in table1:
     for row in table.find_all("tr")[1:]:

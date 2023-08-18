@@ -15,6 +15,7 @@ application.config['MYSQL_HOST'] = "localhost"
 application.config['MYSQL_USER'] = "Max"
 application.config['MYSQL_PASSWORD'] = "max123"
 application.config['MYSQL_DB'] = "korean_decks"
+
 mysql = MySQL(application)
 currID = -1
 application.config["SECRET_KEY"] = secret
@@ -313,20 +314,25 @@ def profile_edit(user_id):
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            directoryPath = os.path.join(application.config['UPLOAD_FOLDER'], filename)
-            file.save(directoryPath)
-            insert_query = "UPDATE users SET profile_pic = %s WHERE user_id = %s"
-            values = (filename, user_id)
-            cur = mysql.connection.cursor()
-            cur.execute(insert_query, values)
-            mysql.connection.commit()
-            cur.execute("SELECT COUNT(user_id) FROM logs WHERE user_id = " + str(user_id))
-            vocabCount = cur.fetchone()[0]
-            cur.execute("SELECT COUNT(user_id) FROM decks_user WHERE user_id = " + str(user_id))
-            deckCount = cur.fetchone()[0]
-            return render_template("profileedit.html", username=username, vocabCount=vocabCount,
-                                   deckCount=deckCount, hasPic=True, pic="imgs/" + filename)
+            try:
+                filename = secure_filename(file.filename)
+                directoryPath = os.path.join(application.config['UPLOAD_FOLDER'], filename)
+                file.save(directoryPath)
+                insert_query = "UPDATE users SET profile_pic = %s WHERE user_id = %s"
+                values = (filename, user_id)
+                cur = mysql.connection.cursor()
+                cur.execute(insert_query, values)
+                mysql.connection.commit()
+                cur.execute("SELECT COUNT(user_id) FROM logs WHERE user_id = " + str(user_id))
+                vocabCount = cur.fetchone()[0]
+                cur.execute("SELECT COUNT(user_id) FROM decks_user WHERE user_id = " + str(user_id))
+                deckCount = cur.fetchone()[0]
+                return render_template("profileedit.html", username=username, vocabCount=vocabCount,
+                                       deckCount=deckCount, hasPic=True, pic="imgs/" + filename)
+            except:
+                flash("File not supported")
+                return render_template("profileedit.html", username=username, vocabCount=vocabCount,
+                                       deckCount=deckCount, hasPic=False, pic="imgs/" + filename)
     cur = mysql.connection.cursor()
     cur.execute("SELECT COUNT(user_id) FROM logs WHERE user_id = " + str(user_id))
     vocabCount = cur.fetchone()[0]

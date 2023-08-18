@@ -97,10 +97,8 @@
                     console.log(endingsMap.get(subStr))
                 }
             }
-            console.log(result)
 
-            console.log(result.join('result'))
-            return (result.join('result'))
+            return (result.join('<br>'))
 
         }
 
@@ -258,23 +256,21 @@
                 <button onclick="nextVocab('3')">3</button>
             </form>
         </div>
-        <div>
+
+
+    </div>
+    <div style="z-index:100; width: 100%;  padding-top: 15px; justify-content:space-evenly; justify-items: center; display:grid; row-gap: 20px; grid-template-columns: 1fr 1fr;">
+        <div style = "padding-left: 70px;">
             <form onsubmit="return false">
                 <button onclick="nextVocab('4')">4</button>
             </form>
         </div>
-        <div>
+        <div style = "padding-right: 70px;">
             <form onsubmit="return false">
                 <button onclick="nextVocab('5')">5</button>
             </form>
         </div>
-        <div>
-            <form onsubmit="return false">
-                <button onclick="nextVocab('6')">6</button>
-            </form>
         </div>
-
-    </div>
 </div>
 </div>
 
