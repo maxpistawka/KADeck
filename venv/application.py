@@ -7,14 +7,15 @@ import hgtk
 import os
 from textblob import TextBlob
 from werkzeug.utils import secure_filename
+import config
 
 today = date.today()
 application = Flask(__name__, template_folder='template')
 secret = os.urandom(24)
 application.config['MYSQL_HOST'] = "localhost"
 application.config['MYSQL_USER'] = "Max"
-application.config['MYSQL_PASSWORD'] = "max123"
-application.config['MYSQL_DB'] = "korean_decks"
+application.config['MYSQL_PASSWORD'] = config.password
+application.config['MYSQL_DB'] = config.db
 
 mysql = MySQL(application)
 currID = -1

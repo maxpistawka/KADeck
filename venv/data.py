@@ -1,3 +1,5 @@
+
+
 from getpass import getpass
 
 from hgtk.exception import NotHangulException
@@ -9,13 +11,14 @@ from tabula import read_pdf
 from tabulate import tabulate
 import hgtk
 from datetime import date
-
+import config
 today = date.today()
+
 """
 mydb = mysql.connector.connect(
-        host="localhost",
-        user="Max",
-        password="max123")
+    host="localhost",
+    user="Max",
+    password= config.password)
 my_cursor = mydb.cursor()
 
 my_cursor.execute("CREATE DATABASE our_users")
@@ -23,33 +26,26 @@ my_cursor.execute("CREATE DATABASE our_users")
 my_cursor.execute("SHOW DATABASES")
 for db in my_cursor:
     print(db)
-"""
-"""
-mydb = mysql.connector.connect(
-        host="localhost",
-        user="Max",
-        password="max123")
-my_cursor = mydb.cursor()
 
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="Max",
+    password= config.password,
+    database= config.db)
+my_cursor = mydb.cursor()
 my_cursor.execute("CREATE DATABASE korean_decks")
 
 my_cursor.execute("SHOW DATABASES")
 for db in my_cursor:
     print(db)
-"""
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="Max",
-    password="max123",
-    database="korean_decks")
-my_cursor = mydb.cursor()
 
-'''
+
+
+
 my_cursor.execute("INSERT INTO decks (deck_id, title, date_created, admin_user_id) VALUES (%s, %s, %s, %s)",
                   (1, "elementary", today, 3))
 mydb.commit()
-'''
-'''
+
 url = 'https://learning-korean.com/elementary/20210101-10466/'
 # Create object page
 page = requests.get(url)
@@ -73,7 +69,7 @@ for i in range(len(arr)):
                     nextDecomposed = hgtk.letter.decompose(kor[s+1])
                     ends += decomposed[-1] + nextDecomposed[0]
                 except NotHangulException:
-                    """ nothing """
+                    
         except NotHangulException:
             print(arr[i])
     arr[i].append(ends)
@@ -93,4 +89,4 @@ for i in range(len(arr)):
 
 
 mydb.commit()
-'''
+"""
