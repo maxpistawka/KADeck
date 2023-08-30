@@ -1,7 +1,7 @@
 # What is KADecks?
 
-KADecks is a Korean Vocaublary Flashcard Program , employing spaced repetition methodology to optimize your memory
-retention while minimizing study time. The program utilizes the SM-2 algorithim outlined in 
+KADecks is a Korean Vocabulary Flashcard Program, employing spaced repetition methodology to optimize your memory
+retention while minimizing study time. The program utilizes the SM-2 algorithm outlined in 
 https://super-memory.com/english/ol/sm2.htm, ensuring an effective interval system for memory retention.
 Distinct from other vocabulary flashcard tools like Anki, KADecks empowers you with the ability to rate each vocabulary 
 item on a scale of 1 to 5, allowing for precise user input for how well they remembered the vocabulary. This 
@@ -30,7 +30,7 @@ Chinese, recently finding interest in learning the Korean language. However, one
 consonant assimilation. Personally, I found this a very difficult part of the Korean language when starting out, as
 each time I was reviewing vocabulary, I would have to go into a handbook of rules that I wrote for all of these, as 
 there are not many good English resources showcasing them. Especially, there are no English resources that show them as 
-you are revieiwing vocabulary. On top of
+you are reviewing vocabulary. On top of
 this, I felt that apps such as Anki that also implements space-based repetition was missing out by only using a range
 of 1-3 for showing how well you remembered the vocabulary. I personally at times felt between numbers, and a scale of
 1-5 far better fits my desire of assessing myself properly. For all of these reasons, I felt heavily inspired to take
@@ -84,6 +84,6 @@ vocabulary information, deck information, profile pictures, and more.
 
 # Special Thanks
 I'd like to give a thank you to the creator of hgtk (Toolkit for Hangul composing) and SuperMemo2 on python,
-as these libaries were essential to the creation of this app.
+as these libraries were essential to the creation of this app.
 
 
